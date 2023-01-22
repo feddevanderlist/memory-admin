@@ -2,22 +2,20 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-
 const BASE_URL = "http://localhost:8000";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AggregateService {
+export class TopFiveServiceService {
 
   constructor(private http: HttpClient) {
   }
 
-  getAggregateData(): Observable<any> {
+  getTopFive(): Observable<any> {
     let headers = {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      'Content-Type': 'application/json;charset=utf-8'
     };
-    return this.http.get(BASE_URL + "/api/admin/aggregate", {headers})
+    return this.http.get(BASE_URL + "/scores", {headers})
   }
 }

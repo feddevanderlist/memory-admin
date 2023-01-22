@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
-const LOGINURL = ""
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,11 @@ export class LoginService {
   }
 
   login(username: string, password: string): Observable<any> {
-    let body = '{}';
-    let headers = {};
-    return this.http.post(LOGINURL, body, {headers})
+    let body = {
+      username: username,
+      password: password
+    };
+    let headers = {'Content-Type': 'application/json;charset=utf-8'};
+    return this.http.post("http://localhost:8000/api/login_check", body, {headers})
   }
 }

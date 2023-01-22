@@ -1,1 +1,99 @@
-<p>aggregate works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Memory statistics</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Number of Games</h5>
+                  <p class="card-text">{{ aantal_spellen }}</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Number of Players</h5>
+                  <p class="card-text">{{ aantal_spelers }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Score statistics</h5>
+                  <ul class="list-group">
+                    <li class="list-group-item"
+                        *ngFor="let user of top_five_data | orderBy: ['score','desc'] | slice:0:5">
+                      <div>{{ user.username }}</div>
+                      <div>{{ user.score }}</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped" role="table">
+                <caption> List of image API's and how many times they are used</caption>
+                <thead>
+                <tr>
+                  <th aria-label="Name of used memory API">Used API name</th>
+                  <th aria-label="Number of times used in a game">Times used in a game</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row" *ngFor="let api of api_data">
+                  <td role="cell">{{ api.api }}</td>
+                  <td role="cell">{{ api.aantal }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Player statistics</h3>
+          <button type="button" class="btn btn-primary" (click)="showOrHideTable()">{{tableButtonText}}</button>
+        </div>
+        <div class="card-body" *ngIf="showTable">
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped" role="table">
+                <caption>List of players</caption>
+                <thead>
+                <tr>
+                  <th aria-label="Player number">#</th>
+                  <th aria-label="Player name">Username</th>
+                  <th aria-label="Player email">Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let player of players; let i = index">
+                  <tr role="row">
+                    <td role="cell">{{ i + 1 }}</td>
+                    <td role="cell">{{ player.username }}</td>
+                    <td role="cell">{{ player.email }}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

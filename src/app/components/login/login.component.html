@@ -1,6 +1,12 @@
-<div>
+<div class="container">
   <h1>Admin memory</h1>
   <hr>
+  <h3>Login</h3>
+  <label for="username">Gebruikersnaam</label>
+  <input type="text" value="" id="username" class="form-control" #username>
+  <label for="password">Wachtwoord</label>
+  <input type="password" value="" id="password" class="form-control" #password>
 
-<button (click)="login(username.value,password.value)"> Login</button>
+  <button (click)="login(username.value,password.value)" class="btn btn-primary" id="login_button"> Login</button>
+  <p *ngIf="errorMsg"><b>{{errorMsg}}</b></p>
 </div>

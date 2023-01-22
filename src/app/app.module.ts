@@ -6,12 +6,14 @@ import {AppComponent} from './app.component';
 import {AggregateComponent} from './components/aggregate/aggregate.component';
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './components/login/login.component';
+import {OrderByPipe} from "./services/order-by-pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     AggregateComponent,
-    LoginComponent
+    LoginComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
