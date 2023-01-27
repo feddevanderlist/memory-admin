@@ -5,10 +5,10 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-// Forward people back to login in case of invalid token
+// Forward people back to login page in case of invalid token
   constructor(private router: Router) {
   }
-
+// If token invalid or http gives an error -> FAIL and forward to login
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(req).pipe(

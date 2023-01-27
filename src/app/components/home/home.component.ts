@@ -18,15 +18,15 @@ import {TopFiveObject} from "../../objects/top-five-object";
 export class HomeComponent implements OnDestroy {
 
   destroy: Subject<boolean> = new Subject<boolean>();
-  aantal_spellen: number;
-  aantal_spelers: number;
-  api_data: ApiObj[];
+  aantal_spellen: number =0;
+  aantal_spelers: number = 0;
+  api_data: ApiObj[] = [];
   top_five_data: any;
 
   showTable: boolean = false;
   tableButtonText: string = "Show players";
 
-  players: PlayerObject[]
+  players: PlayerObject[] = [];
 
   constructor(private aggregateService: AggregateService, private topFiveService: TopFiveService, private playerService: PlayerServiceService, private router: Router) {
     let token = localStorage.getItem('jwt');
@@ -37,11 +37,6 @@ export class HomeComponent implements OnDestroy {
       const navigationExtras: NavigationExtras = {state: {data: 'Error: No token available. While navigating to admin panel'}};
       router.navigate([""], navigationExtras);
     }
-
-    this.aantal_spellen = 0;
-    this.aantal_spelers = 0;
-    this.api_data = [];
-    this.players = [];
 
     this.loadData(topFiveService, playerService);
   }

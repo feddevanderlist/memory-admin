@@ -19,6 +19,7 @@ export class LoginComponent {
     }
   }
 
+  //Login function
   login(username: string, password: string) {
     this.errorMsg = "";
     if (typeof username === 'undefined' || !username || typeof password === 'undefined' || !password) {
