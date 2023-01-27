@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LoginService} from "../../services/login/login.service";
 import {Router} from "@angular/router";
-import {catchError, of} from "rxjs";
+import {catchError, of, throwError} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,17 @@ export class LoginComponent {
   errorMsg: string | undefined;
 
   constructor(private loginService: LoginService, private router: Router) {
-
+    const navigation = this.router.getCurrentNavigation();
+    let state = navigation?.extras.state as { data: string };
+    if (state) {
+      this.errorMsg = state.data;
+    }
   }
 
   login(username: string, password: string) {
     console.log(username);
     console.log(password);
+    this.errorMsg = "";
     if (typeof username === 'undefined' || !username || typeof password === 'undefined' || !password) {
       this.errorMsg = `Error: gebruikersnaam of wachtwoord mag niet leeg zijn`;
       return;
@@ -30,7 +35,6 @@ export class LoginComponent {
           }
           return of([]);
         })).subscribe(data => {
-        console.log(data);
         if (!data || data.length == 0) {
           return;
         }
@@ -40,9 +44,12 @@ export class LoginComponent {
 
         let json = JSON.parse(decoded);
         console.log(json['roles']);
-
-        localStorage.setItem('jwt', token);
-        this.router.navigate(["home"]);
+        if (json['roles'].includes('ROLE_ADMIN')) {
+          localStorage.setItem('jwt', token);
+          this.router.navigate(["home"]);
+        } else {
+          throwError(() => "Error: gebruiker is geen admin");
+        }
       },
       error => {
         console.log(error);

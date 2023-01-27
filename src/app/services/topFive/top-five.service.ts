@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:8000";
 @Injectable({
   providedIn: 'root'
 })
-export class TopFiveServiceService {
+export class TopFiveService {
 
   constructor(private http: HttpClient) {
   }
