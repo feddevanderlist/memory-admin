@@ -20,8 +20,6 @@ export class LoginComponent {
   }
 
   login(username: string, password: string) {
-    console.log(username);
-    console.log(password);
     this.errorMsg = "";
     if (typeof username === 'undefined' || !username || typeof password === 'undefined' || !password) {
       this.errorMsg = `Error: gebruikersnaam of wachtwoord mag niet leeg zijn`;
@@ -43,7 +41,6 @@ export class LoginComponent {
         const decoded = LoginComponent.urlBase64Decode(parts[1]);
 
         let json = JSON.parse(decoded);
-        console.log(json['roles']);
         if (json['roles'].includes('ROLE_ADMIN')) {
           localStorage.setItem('jwt', token);
           this.router.navigate(["home"]);
@@ -52,7 +49,6 @@ export class LoginComponent {
         }
       },
       error => {
-        console.log(error);
         this.errorMsg = error.media;
       })
   }

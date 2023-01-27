@@ -6,7 +6,6 @@ import {PlayerServiceService} from "../../services/players/player-service.servic
 import {NavigationExtras, Router} from "@angular/router";
 import {ApiObj} from "../../objects/api-obj";
 import {PlayerObject} from "../../objects/player-object";
-import {AggregateObject} from "../../objects/aggregate-object";
 import {TopFiveObject} from "../../objects/top-five-object";
 
 
@@ -42,7 +41,6 @@ export class HomeComponent implements OnDestroy {
     this.aantal_spellen = 0;
     this.aantal_spelers = 0;
     this.api_data = [];
-    this.top_five_data = [];
     this.players = [];
 
     this.loadData(topFiveService, playerService);
@@ -54,7 +52,6 @@ export class HomeComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy))
       .pipe(
         map((response: any) => {
-          console.log(response);
           this.aantal_spelers = response[1].aantal_spelers;
           this.aantal_spellen = response[0].aantal_spellen;
           this.api_data = response[2].map((obj: ApiObj) => {
